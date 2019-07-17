@@ -8,13 +8,22 @@ import SEO from "../components/seo"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
+    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+      <h1>Handle your handles.</h1>
+      <div>
+      </div>
+      <h4>
+        Meeting someone new? Don’t give them 10 handles. 
+        Give them your Duffletag. They can access all your 
+        profiles with just one username. That’s handy.
+      </h4>
+      <button>
+        <Link to="/tag/">GET DUFFLETAG</Link>
+      </button>
+    </div>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
-    <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 )
 

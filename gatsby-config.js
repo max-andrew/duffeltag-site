@@ -1,10 +1,17 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Duffeltag`,
+    description: `Handle your handles.`,
+    author: `Duffeltag`,
   },
   plugins: [
+    // Gatsby's data processing layer begins with “source” plugins. Here we
+    // setup the site to pull data from the "documents" collection in a local
+    // MongoDB instance
+    {
+      resolve: `gatsby-source-mongodb`,
+      options: { dbName: `duffeltag`, collection: `tags`, connectionString: `mongodb://max:92LcggDxpsbz8aN@ds245927.mlab.com:45927/duffeltag` },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

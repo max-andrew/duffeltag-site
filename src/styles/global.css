@@ -1,0 +1,18 @@
+@font-face {
+	font-family: "Circular-Med";
+	src: url("../fonts/circular/circular-medium.otf");
+}
+
+@font-face {
+	font-family: "Apercu-Med";
+	src: url("../fonts/apercu/Apercu-Medium.otf");
+}
+
+@font-face {
+	font-family: "Apercu-Bold";
+	src: url("../fonts/apercu/Apercu-Bold.otf");
+}
+
+h4 {
+	font-family: "Apercu-Bold";
+}
