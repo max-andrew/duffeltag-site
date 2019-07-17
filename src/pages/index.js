@@ -22,7 +22,7 @@ const IndexPage = () => (
       </button>
     </div>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+      {/* <Image /> */}
     </div>
   </Layout>
 )
