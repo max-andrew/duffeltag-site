@@ -10,9 +10,20 @@ module.exports = {
     // MongoDB instance
     {
       resolve: `gatsby-source-mongodb`,
-      options: { dbName: `duffeltag`, collection: `tags`, connectionString: `mongodb://max:92LcggDxpsbz8aN@ds245927.mlab.com:45927/duffeltag` },
+      options: { 
+        auth: { user: `max`, password: `kJi505C&iin4` },
+        server: { address: `cluster0-z5eqg.mongodb.net` },
+        dbName: `sample_db`, 
+        collection: `sample_collect`, 
+      },
     },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-144323653-1",
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

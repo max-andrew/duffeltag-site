@@ -4,29 +4,19 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-// export default ({ frontmatter: { title, date } }) => (
-const TagPage = () => (
+export default ({ data }) => (
   <Layout>
     <SEO title="Tag Page" />
+    <p>About {data.site.siteMetadata.title}</p>
   </Layout>
 )
 
-export default TagPage
-
-
-/*export const query = graphql`
+export const query = graphql`
   query {
-    allMarkdownRemark {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            date(formatString: "DD MMMM, YYYY")
-          }
-        }
+    site {
+      siteMetadata {
+        title
       }
     }
   }
-`*/
+`

@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
 import Layout from "../components/layout"
 import Image from "../components/image"
@@ -18,7 +19,7 @@ const IndexPage = () => (
         profiles with just one username. That’s handy.
       </h4>
       <button>
-        <Link to="/tag/">GET DUFFLETAG</Link>
+        <OutboundLink href="/tag/">GET DUFFLETAG</OutboundLink>
       </button>
     </div>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
