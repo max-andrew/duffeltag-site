@@ -1,7 +1,66 @@
+/* Custom fonts */
+@font-face {
+  font-family: "Circular-Med";
+  src: url("../fonts/circular/circular-medium.otf");
+}
+
+@font-face {
+  font-family: "Circular-Black";
+  src: url("../fonts/circular/circular-black.otf");
+}
+
+@font-face {
+  font-family: "Apercu-Mono";
+  src: url("../fonts/apercu/Apercu-Mono.otf");
+}
+
+@font-face {
+  font-family: "Apercu-Med";
+  src: url("../fonts/apercu/Apercu-Medium.otf");
+}
+
+@font-face {
+  font-family: "Apercu-Bold";
+  src: url("../fonts/apercu/Apercu-Bold.otf");
+}
+
+/* Custom classes */
 html {
-  font-family: sans-serif;
+  background-image: url("../images/big_shaded_shapes.png");
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  max-width: 850px;
+  margin-bottom: 1.45rem;
+}
+
+.item1 {
+  max-width: 350px;
+  display: inline;
+  margin: 1.45rem;
+  margin-top: 0;
+}
+
+.item2 {
+  max-width: 250px;
+  /* height: 100px; */
+  width: fit-content;
+  min-width: 200px;
+  flex: 1;
+  margin: 0 auto;
+  align-self: center;
+}
+
+/* Standard layout */
+html {
+  font-family: "Apercu-Med", sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  background-color: #99CCFF;
 }
 body {
   margin: 0;
@@ -42,6 +101,7 @@ template {
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  text-decoration: none;
 }
 a:active,
 a:hover {
@@ -104,6 +164,13 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible;
+}
+button {
+  background-color: #99CCFF;
+  border: none;
+  text-decoration: none;
+  padding: .5rem .75rem;
+  border-radius: 3px;
 }
 button,
 input,
@@ -185,7 +252,7 @@ textarea {
   font: inherit;
 }
 html {
-  font: 112.5%/1.45em georgia, serif;
+  font: 112.5%/1.45em "Apercu-Bold", sans-serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -200,7 +267,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  font-family: "Apercu-Bold", sans-serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -230,11 +297,11 @@ h1 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: "Apercu-Bold", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   line-height: 1.1;
 }
 h2 {
@@ -264,12 +331,11 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: "Apercu-Bold", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1.38316rem;
-  line-height: 1.1;
+  font-size: 1.3rem;
+  line-height: 1.2;
 }
 h4 {
   margin-left: 0;

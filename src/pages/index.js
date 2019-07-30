@@ -1,29 +1,33 @@
 import React from "react"
-import { Link } from "gatsby"
 import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import DanTag from "../components/dan_tag"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <h1>Handle your handles.</h1>
-      <div>
+    <div className="container">
+
+      <div className="item1">
+        <h1 style={{ color: 'white' }}>Handle your handles.</h1>
+        <div style={{ width: '20%', maxWidth: '90px', backgroundColor: '#99CCFF', height: '10px', marginBottom: `1.45rem` }}></div>
+        <h3 style={{ color: 'white' }}>
+          Meeting someone new? Don’t give them 10 handles. 
+          Give them your Duffeltag. They can access all your 
+          profiles with just one username. That’s handy.
+        </h3>
+        <button>
+          <OutboundLink style={{ color: 'white', padding: '.25rem .125em', fontSize: '1.125rem' }} href="/reserve">
+            GET DUFFELTAG
+          </OutboundLink>
+        </button>
       </div>
-      <h4>
-        Meeting someone new? Don’t give them 10 handles. 
-        Give them your Duffletag. They can access all your 
-        profiles with just one username. That’s handy.
-      </h4>
-      <button>
-        <OutboundLink href="/tag/">GET DUFFLETAG</OutboundLink>
-      </button>
-    </div>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      {/* <Image /> */}
+
+      <div className="item2">
+        <DanTag />
+      </div>
     </div>
   </Layout>
 )

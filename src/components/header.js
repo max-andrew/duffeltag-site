@@ -1,4 +1,4 @@
-import { Link } from "gatsby"
+import { OutboundLink } from "gatsby-plugin-google-analytics"
 import PropTypes from "prop-types"
 import React from "react"
 
@@ -11,21 +11,22 @@ const Header = ({ siteTitle }) => (
     <div
       style={{
         margin: `0 auto`,
-        maxWidth: 960,
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
+      <p style={{ fontFamily: "Circular-Black", margin: 0, textAlign: 'center', lettingSpacing: '100px' }}>
+        <OutboundLink
+          href="/"
           style={{
-            color: `black`,
+            color: `white`,
             textDecoration: `none`,
+            textTransform: 'uppercase',
+            fontSize: '28px',
           }}
         >
           {siteTitle}
-        </Link>
-      </h1>
+        </OutboundLink>
+      </p>
     </div>
   </header>
 )
