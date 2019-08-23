@@ -173,7 +173,7 @@ class Me extends React.Component {
   handleAvailability = () => this.tagIsAvailable().then(item => this.setState({ showStillAvailableMessage: true, tagAvailable: item }))
 
   render() {
-    if (typeof window !== `undefined` && !isLoggedIn()) {
+    if (isBrowser() && !isLoggedIn()) {
       navigate(`/login`)
     }
 
