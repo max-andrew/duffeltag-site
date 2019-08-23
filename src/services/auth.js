@@ -7,7 +7,7 @@ const APP_ID = "duffeltag-ceqsw"
 
 // Wrap the require in check for window
 const getApp = () => {
-  if (typeof window !== undefined) {
+  if (isBrowser()) {
     const {
       Stitch,
       UserPasswordAuthProviderClient,
