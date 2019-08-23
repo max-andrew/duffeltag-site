@@ -16,7 +16,7 @@ const getApp = () => {
     } = require('mongodb-stitch-browser-sdk')
 
     // Initialize client if none exists
-    return app = Stitch.hasAppClient(APP_ID)
+    return Stitch.hasAppClient(APP_ID)
       ? Stitch.getAppClient(APP_ID)
       : Stitch.initializeAppClient(APP_ID)
   }
