@@ -19,7 +19,7 @@ class Tag extends React.Component {
 		const pageTag = urlArray[urlArray.indexOf("tag")+1]
 		this.setState({pageTag: pageTag})
 
-		this.handleLogInAnon().then(() => { this.loadValuesToState(pageTag)})
+		this.handleLogInAnon().then(this.loadValuesToState(pageTag))
 
 		this.tagExists(pageTag)
 	}
