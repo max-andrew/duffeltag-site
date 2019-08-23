@@ -16,18 +16,16 @@ const getApp = () => {
     } = require('mongodb-stitch-browser-sdk')
 
     // Initialize client if none exists
-    const app = Stitch.hasAppClient(APP_ID)
+    return app = Stitch.hasAppClient(APP_ID)
       ? Stitch.getAppClient(APP_ID)
       : Stitch.initializeAppClient(APP_ID)
-
-    return app
   }
 }
 
 /* AUTH FUNCTIONS */
 
 // Get user values
-export const getUser = () => getApp().auth.user
+export const getUser = () => isBrowser() ? getApp().auth.user : {}
 
 export const getUserId = () => {
   // getUser().user_id

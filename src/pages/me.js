@@ -11,7 +11,7 @@ class Me extends React.Component {
     super(props)
     this.state = {
       inputNamesToBeUpdated: [],
-      supported_platforms: ["Instagram","Snapchat","Phone","VSCO","Venmo","TikTok","WhatsApp","Twitter","Facebook","Spotify"],
+      supported_platforms: ["Instagram","Snapchat","Phone","Venmo","VSCO","WhatsApp","Twitter","Facebook","TikTok","Spotify"],
     }
   }
 
@@ -25,6 +25,9 @@ class Me extends React.Component {
   }
 
   componentDidMount() {
+    if (!isLoggedIn()) {
+      navigate(`/login`)
+    }
     // preload all available inputs
     this.loadValueToState("tag")
     this.setState({ saved_tag: this.state.tag })
@@ -121,9 +124,8 @@ class Me extends React.Component {
     // get tag from state
     const tag = this.state.tag
 
-    // is not lowercase
-    if (tag.toLowerCase() !== tag)
-      return false
+    // make lowercase
+    tag = tag.toLowerCase()
 
     // is tag proper length
     if (tag.length<3 || tag.length>18)
@@ -173,10 +175,6 @@ class Me extends React.Component {
   handleAvailability = () => this.tagIsAvailable().then(item => this.setState({ showStillAvailableMessage: true, tagAvailable: item }))
 
   render() {
-    if (isBrowser() && !isLoggedIn()) {
-      navigate(`/login`)
-    }
-
     const getShareCard = () => {
       return this.hasTag() ?  
         <div>
