@@ -1,7 +1,7 @@
 import { isBrowser, getUserId, isLoggedIn, loginAnonymous, logoutCurrentUser } from "../services/auth"
 
 // Wrap the require in check for window
-if (isBrowser()) {
+if (typeof window !== undefined) {
   const {
     Stitch,
     RemoteMongoClient

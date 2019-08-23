@@ -3,7 +3,7 @@ import { navigate } from "gatsby"
 export const isBrowser = () => typeof window !== "undefined"
 
 // Wrap the require in check for window
-if (isBrowser()) {
+if (typeof window !== undefined) {
   const {
     Stitch,
     AnonymousCredential,
