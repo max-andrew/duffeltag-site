@@ -1,20 +1,22 @@
 import { isBrowser, getUserId, isLoggedIn, loginAnonymous, logoutCurrentUser } from "../services/auth"
 
-// Wrap the require in check for window
-if (typeof window !== undefined) {
-  const {
-    Stitch,
-    RemoteMongoClient
-  } = require('mongodb-stitch-browser-sdk');
+// Wrap the app in check for window
+const getUsersCollection = () => {
+  if (isBrowser()) {
+    const {
+      Stitch,
+      RemoteMongoClient
+    } = require('mongodb-stitch-browser-sdk');
 
-  const APP_ID = "duffeltag-ceqsw"
-  // Initialize client if none exists
-  const client = Stitch.hasAppClient(APP_ID)
-    ? Stitch.getAppClient(APP_ID)
-    : Stitch.initializeAppClient(APP_ID)
+    const APP_ID = "duffeltag-ceqsw"
+    // Initialize client if none exists
+    const client = Stitch.hasAppClient(APP_ID)
+      ? Stitch.getAppClient(APP_ID)
+      : Stitch.initializeAppClient(APP_ID)
 
-  const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('duffeltag')
-  const usersCollection = db.collection('users')
+    const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('duffeltag')
+    return db.collection('users')
+  }
 }
 
 /* DATABASE OPERATIONS */
@@ -24,7 +26,7 @@ export const updateValue = (key, value) => {
   const query = {owner_id: getUserId()}
   const update = { "$set": { [key]: value } }
 
-  usersCollection.updateOne(query, update, { "upsert": true })
+  getUsersCollection().updateOne(query, update, { "upsert": true })
     .then(result => {
       const { matchedCount, modifiedCount } = result
       if(matchedCount && modifiedCount) {
@@ -37,7 +39,7 @@ export const updateValue = (key, value) => {
 // Get key's value for current user
 export const getValue = key => {
   return new Promise(resolve => {
-    usersCollection.findOne({ "owner_id" : getUserId() })
+    getUsersCollection().findOne({ "owner_id" : getUserId() })
       .then(item => {
         console.log("Successfully found " + item[key])
         resolve(item[key])
@@ -49,7 +51,7 @@ export const getValue = key => {
 // Get user document current user
 export const getUserObject = id => {
   return new Promise(resolve => {
-    usersCollection.findOne({ "owner_id" : getUserId() })
+    getUsersCollection().findOne({ "owner_id" : getUserId() })
       .then(item => {
         console.log(Object.keys(item))
         console.log("Successfully found " + item)
@@ -62,7 +64,7 @@ export const getUserObject = id => {
 // Find if there is a document in collection that matches query
 export const isDocWhere = (key,value) => {
   return new Promise(resolve => {
-    usersCollection.find({ [key]: value }).toArray()
+    getUsersCollection().find({ [key]: value }).toArray()
       .then(items => {
         console.log(`Successfully found ${items.length} documents.`)
         resolve(items.length!==0)
@@ -74,7 +76,7 @@ export const isDocWhere = (key,value) => {
 // Get document that matches query
 export const getDocWhere = (key,value) => {
   return new Promise(resolve => {
-    usersCollection.find({ [key]: value }).toArray()
+    getUsersCollection().find({ [key]: value }).toArray()
       .then(items => {
         console.log(`Successfully found ${items.length} documents.`)
         if (items.length > 0) {

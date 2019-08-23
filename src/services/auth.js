@@ -2,29 +2,32 @@ import { navigate } from "gatsby"
 
 export const isBrowser = () => typeof window !== "undefined"
 
-// Wrap the require in check for window
-if (typeof window !== undefined) {
-  const {
-    Stitch,
-    AnonymousCredential,
-    UserPasswordCredential,
-    UserPasswordAuthProviderClient,
-    resendConfirmationEmail,
-    logoutUserWithId
-  } = require('mongodb-stitch-browser-sdk')
+// Stitch values
+const APP_ID = "duffeltag-ceqsw"
 
-  // Stitch values
-  const APP_ID = "duffeltag-ceqsw"
-  // Initialize client if none exists
+// Wrap the require in check for window
+const getApp = () => {
+  if (typeof window !== undefined) {
+    const {
+      Stitch,
+      UserPasswordAuthProviderClient,
+      resendConfirmationEmail,
+      logoutUserWithId
+    } = require('mongodb-stitch-browser-sdk')
+
+    // Initialize client if none exists
     const app = Stitch.hasAppClient(APP_ID)
       ? Stitch.getAppClient(APP_ID)
       : Stitch.initializeAppClient(APP_ID)
+
+    return app
+  }
 }
 
 /* AUTH FUNCTIONS */
 
 // Get user values
-export const getUser = () => isBrowser() ? app.auth.user : {}
+export const getUser = () => getApp().auth.user
 
 export const getUserId = () => {
   // getUser().user_id
@@ -38,18 +41,16 @@ const setUser = user => window.localStorage.setItem("user", user)
 
 // Log in user
 export function loginAnonymous() {
+  var credential = null
+  if (isBrowser()) {
+    const { AnonymousCredential } = require('mongodb-stitch-browser-sdk')
+    credential = new AnonymousCredential()
+  }
   return new Promise(resolve => {
     // Allow users to log in anonymously
-    const credential = new AnonymousCredential();
-    resolve(app.auth.loginWithCredential(credential));
+    resolve(getApp().auth.loginWithCredential(credential))
   })
 }
-
-/*export async function logInAnon() {
-  if (!isLoggedIn()) {
-    return await loginAnonymous()
-  }
-}*/
 
 export async function logOutAnon() {
     const localUser = getUser()
@@ -60,9 +61,13 @@ export async function logOutAnon() {
 }
 
 export const handleLogin = ({ email, password }) => {
-  const credential = new UserPasswordCredential(email, password)
+  var credential = null
+  if (isBrowser()) {
+    const { UserPasswordCredential } = require('mongodb-stitch-browser-sdk')
+    credential = new UserPasswordCredential(email, password)
+  }
 
-  app.auth.loginWithCredential(credential)
+  getApp().auth.loginWithCredential(credential)
 
   // Returns a promise that resolves to the authenticated user
   .then(authedUser => logInSuccess(authedUser))
@@ -87,12 +92,12 @@ export function logoutCurrentUser() {
     const user = getUserId()
     console.log(user)
     if(user) {
-      resolve(app.auth.logoutUserWithId(user))
+      resolve(getApp().auth.logoutUserWithId(user))
     }
   })
 }
 
-const logoutAll = () => app.auth.logout()
+const logoutAll = () => getApp().auth.logout()
 
 export const handleLogout = () => {
   logoutCurrentUser(getUserId())
@@ -106,79 +111,98 @@ const purgeAuthInfos = () =>
 
 // Reset password
 export const resetRequest = email => {
-  const emailPassClient = Stitch.defaultAppClient.auth
-  .getProviderClient(UserPasswordAuthProviderClient.factory);
+  if (isBrowser()) {
+    const { UserPasswordAuthProviderClient } = require('mongodb-stitch-browser-sdk')
 
-  emailPassClient.sendResetPasswordEmail(email).then(() => {
-    console.log("Successfully sent password reset email!");
-  }).catch(err => {
-    console.log("Error sending password reset email:", err);
-  });
+    const emailPassClient = getApp().defaultAppClient.auth
+    .getProviderClient(UserPasswordAuthProviderClient.factory);
+
+    emailPassClient.sendResetPasswordEmail(email).then(() => {
+      console.log("Successfully sent password reset email!");
+    }).catch(err => {
+      console.log("Error sending password reset email:", err);
+    });
+  }
 }
 
 export const resetPassword = userNewPassword => {
-  // Parse the URL query parameters
-  const url = window.location.search;
-  const params = new URLSearchParams(url);
+  if (isBrowser()) {
+    const { UserPasswordAuthProviderClient } = require('mongodb-stitch-browser-sdk')
 
-  const token = params.get('token');
-  const tokenId = params.get('tokenId');
-  const newPassword = userNewPassword;
+    // Parse the URL query parameters
+    const url = window.location.search;
+    const params = new URLSearchParams(url);
 
-  // Confirm the user's email/password account
-  const emailPassClient = app.auth
-    .getProviderClient(UserPasswordAuthProviderClient.factory);
+    const token = params.get('token');
+    const tokenId = params.get('tokenId');
+    const newPassword = userNewPassword;
 
-  emailPassClient.resetPassword(token, tokenId, newPassword).then(() => {
-    console.log("Successfully reset password!");
-  }).catch(err => {
-    console.log("Error resetting password:", err);
-  });
+    // Confirm the user's email/password account
+    const emailPassClient = getApp().auth
+      .getProviderClient(UserPasswordAuthProviderClient.factory);
+
+    emailPassClient.resetPassword(token, tokenId, newPassword).then(() => {
+      console.log("Successfully reset password!");
+    }).catch(err => {
+      console.log("Error resetting password:", err);
+    });
+  }
 }
 
 // Add new user
 export const newUser = userEmailPassword => {
-  const emailPassClient = app.auth
-    .getProviderClient(UserPasswordAuthProviderClient.factory);
+  if (isBrowser()) {
+    const { UserPasswordAuthProviderClient } = require('mongodb-stitch-browser-sdk')
 
-  emailPassClient.registerWithEmail(userEmailPassword[0], userEmailPassword[1])
-    .then(() => {
-       console.log("Successfully sent account confirmation email!");
-       navigate(`/login`)
-    })
-    .catch(err => {
-       console.log("Error registering new user:", err);
-       alert("Error registering, please check your email and password.")
-    });
+    const emailPassClient = getApp().auth
+      .getProviderClient(UserPasswordAuthProviderClient.factory);
+
+    emailPassClient.registerWithEmail(userEmailPassword[0], userEmailPassword[1])
+      .then(() => {
+         console.log("Successfully sent account confirmation email!");
+         navigate(`/login`)
+      })
+      .catch(err => {
+         console.log("Error registering new user:", err);
+         alert("Error registering, please check your email and password.")
+      });
+  }
 }
 
 // Confirm email
 export const confirmEmail = () => {
-  // Parse the URL query parameters
-  const url = window.location.search;
-  const params = new URLSearchParams(url);
-  const token = params.get('token');
-  const tokenId = params.get('tokenId');
+  if (isBrowser()) {
+    const { UserPasswordAuthProviderClient } = require('mongodb-stitch-browser-sdk')
 
-  // Confirm the user's email/password account
-  const emailPassClient = Stitch.defaultAppClient.auth
-    .getProviderClient(UserPasswordAuthProviderClient.factory);
+    // Parse the URL query parameters
+    const url = window.location.search;
+    const params = new URLSearchParams(url);
+    const token = params.get('token');
+    const tokenId = params.get('tokenId');
 
-  return emailPassClient.confirmUser(token, tokenId);
+    // Confirm the user's email/password account
+    const emailPassClient = getApp().defaultAppClient.auth
+      .getProviderClient(UserPasswordAuthProviderClient.factory);
+
+    return emailPassClient.confirmUser(token, tokenId);
+  }
 }
 
 // Resend activation email
 export const resendActivationEmail = userEmail => {
-  const emailPassClient = app.auth
-    .getProviderClient(UserPasswordAuthProviderClient.factory);
+  if (isBrowser()) {
+    const { UserPasswordAuthProviderClient } = require('mongodb-stitch-browser-sdk')
+    const emailPassClient = getApp().auth
+      .getProviderClient(UserPasswordAuthProviderClient.factory);
 
-  emailPassClient.resendConfirmationEmail(userEmail)
-    .then(() => {
-      console.log("Successfully sent account confirmation email!");
-      navigate(`/login`)
-    })
-    .catch(err => {
-      console.log("Error registering new user:", err);
-      alert("Error registering, please check your email.")
-    });
+    emailPassClient.resendConfirmationEmail(userEmail)
+      .then(() => {
+        console.log("Successfully sent account confirmation email!");
+        navigate(`/login`)
+      })
+      .catch(err => {
+        console.log("Error registering new user:", err);
+        alert("Error registering, please check your email.")
+      });
+  }
 }
