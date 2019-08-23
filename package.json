@@ -22,7 +22,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
-    "save": "^2.4.0"
+    "save": "^2.4.0",
+    "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
     "prettier": "^1.18.2"

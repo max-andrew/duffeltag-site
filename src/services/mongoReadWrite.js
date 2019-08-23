@@ -1,19 +1,23 @@
-import { getUserId, isLoggedIn, loginAnonymous, logoutCurrentUser } from "../services/auth"
+import { isBrowser, getUserId, isLoggedIn, loginAnonymous, logoutCurrentUser } from "../services/auth"
 
-const {
-  Stitch,
-  RemoteMongoClient
-} = require('mongodb-stitch-browser-sdk');
+// Wrap the require in check for window
+if (isBrowser()) {
 
-const APP_ID = "duffeltag-ceqsw"
+  const {
+    Stitch,
+    RemoteMongoClient
+  } = require('mongodb-stitch-browser-sdk');
 
-// Initialize client if none exists
-const client = Stitch.hasAppClient(APP_ID)
-  ? Stitch.getAppClient(APP_ID)
-  : Stitch.initializeAppClient(APP_ID)
+  const APP_ID = "duffeltag-ceqsw"
+  // Initialize client if none exists
+  const client = Stitch.hasAppClient(APP_ID)
+    ? Stitch.getAppClient(APP_ID)
+    : Stitch.initializeAppClient(APP_ID)
 
-const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('duffeltag')
-const usersCollection = db.collection('users')
+  const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('duffeltag')
+  const usersCollection = db.collection('users')
+
+}
 
 /* DATABASE OPERATIONS */
 

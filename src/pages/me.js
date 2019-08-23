@@ -1,6 +1,6 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { isLoggedIn, handleLogout, logOutAnon } from "../services/auth"
+import { isBrowser, isLoggedIn, handleLogout, logOutAnon } from "../services/auth"
 import { updateValue, getValue, getUserObject, isDocWhere } from "../services/mongoReadWrite"
 import restrictedTags from "../components/restricted.json"
 import Layout from "../components/layout"
@@ -173,7 +173,7 @@ class Me extends React.Component {
   handleAvailability = () => this.tagIsAvailable().then(item => this.setState({ showStillAvailableMessage: true, tagAvailable: item }))
 
   render() {
-    if (!isLoggedIn()) {
+    if (isBrowser() && !isLoggedIn()) {
       navigate(`/login`)
     }
 

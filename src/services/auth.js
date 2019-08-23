@@ -1,30 +1,30 @@
 import { navigate } from "gatsby"
 
-const {
-  Stitch,
-  AnonymousCredential,
-  UserPasswordCredential,
-  UserPasswordAuthProviderClient,
-  resendConfirmationEmail,
-  logoutUserWithId
-} = require('mongodb-stitch-browser-sdk')
+export const isBrowser = () => typeof window !== "undefined"
 
-// Stitch values
-const APP_ID = "duffeltag-ceqsw"
-// Initialize client if none exists
-const app = Stitch.hasAppClient(APP_ID)
-  ? Stitch.getAppClient(APP_ID)
-  : Stitch.initializeAppClient(APP_ID)
+// Wrap the require in check for window
+if (isBrowser()) {
+  const {
+    Stitch,
+    AnonymousCredential,
+    UserPasswordCredential,
+    UserPasswordAuthProviderClient,
+    resendConfirmationEmail,
+    logoutUserWithId
+  } = require('mongodb-stitch-browser-sdk')
+
+  // Stitch values
+  const APP_ID = "duffeltag-ceqsw"
+  // Initialize client if none exists
+    const app = Stitch.hasAppClient(APP_ID)
+      ? Stitch.getAppClient(APP_ID)
+      : Stitch.initializeAppClient(APP_ID)
+}
 
 /* AUTH FUNCTIONS */
 
-export const isBrowser = () => typeof window !== "undefined"
-
 // Get user values
-export const getUser = () => app.auth.user
-  /*isBrowser() && window.localStorage.getItem(LOCAL_STITCH_KEY)
-    ? JSON.parse(window.localStorage.getItem(LOCAL_STITCH_KEY))
-    : {} */
+export const getUser = () => isBrowser() ? app.auth.user : {}
 
 export const getUserId = () => {
   // getUser().user_id
