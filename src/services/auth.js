@@ -10,7 +10,6 @@ const getApp = () => {
   if (isBrowser()) {
     const {
       Stitch,
-      UserPasswordAuthProviderClient,
       resendConfirmationEmail,
       logoutUserWithId
     } = require('mongodb-stitch-browser-sdk')
@@ -51,11 +50,11 @@ export function loginAnonymous() {
 }
 
 export async function logOutAnon() {
-    const localUser = getUser()
-    if (localUser !== undefined) {
-      if (localUser["loggedInProviderName"] === "anon-user")
-        return logoutCurrentUser()
-    }
+  const localUser = getUser()
+  if (localUser !== undefined) {
+    if (localUser["loggedInProviderName"] === "anon-user")
+      return logoutCurrentUser()
+  }
 }
 
 export const handleLogin = ({ email, password }) => {
@@ -112,7 +111,7 @@ export const resetRequest = email => {
   if (isBrowser()) {
     const { UserPasswordAuthProviderClient } = require('mongodb-stitch-browser-sdk')
 
-    const emailPassClient = getApp().defaultAppClient.auth
+    const emailPassClient = getApp().auth
     .getProviderClient(UserPasswordAuthProviderClient.factory);
 
     emailPassClient.sendResetPasswordEmail(email).then(() => {
@@ -179,7 +178,7 @@ export const confirmEmail = () => {
     const tokenId = params.get('tokenId');
 
     // Confirm the user's email/password account
-    const emailPassClient = getApp().defaultAppClient.auth
+    const emailPassClient = getApp().auth
       .getProviderClient(UserPasswordAuthProviderClient.factory);
 
     return emailPassClient.confirmUser(token, tokenId);
