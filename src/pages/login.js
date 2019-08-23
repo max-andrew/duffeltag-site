@@ -15,9 +15,12 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    if (isLoggedIn()) {
+    this.handleIsLoggedIn()
+  }
+
+  async handleIsLoggedIn () {
+    if (await isLoggedIn())
       navigate(`/me`)
-    }
   }
 
   handleUpdate = event => {

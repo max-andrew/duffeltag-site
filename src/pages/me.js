@@ -251,6 +251,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="tag" 
+                  style={{textTransform: 'lowercase'}}
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.tag} 
                 />
