@@ -77,8 +77,8 @@ export const logInSuccess = authedUser => {
   navigate(`/me`)
 }
 
-export const isLoggedIn = () => {
-  const user = getUserId()
+export async function isLoggedIn() {
+  const user = await getUserId()
   return !!user
 }
 

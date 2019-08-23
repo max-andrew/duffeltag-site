@@ -29,28 +29,20 @@ class Me extends React.Component {
       navigate(`/login`)
     }
     // preload all available inputs
-    this.loadValueToState("tag")
-    this.setState({ saved_tag: this.state.tag })
-    this.loadValueToState("fname")
-    this.loadValueToState("lname")
-    this.loadValueToState("handle0")
-    this.loadValueToState("platform0")
-    this.loadValueToState("handle1")
-    this.loadValueToState("platform1")
-    this.loadValueToState("handle2")
-    this.loadValueToState("platform2")
-    this.loadValueToState("handle3")
-    this.loadValueToState("platform3")
+    this.loadValuesToState().then(() => this.setState({ saved_tag: this.state.tag }))
 
     this.loadCurrentSavedTag()
   }
   
   /* HELPER FUNCTIONS */
-  loadValueToState(name) {
-    getValue(name)
-    .then(value => {
-      if (!!value)
-        this.setState({ [name]: value })
+  async loadValuesToState() {
+    const allInputs = ["tag","fname","lname","handle0","platform0","handle1","platform1","handle2","platform2","handle3","platform3"]
+    allInputs.forEach(item => {
+      getValue(item)
+      .then(value => {
+        if (!!value)
+          this.setState({ [item]: value })
+      })
     })
   }
 
@@ -216,6 +208,7 @@ class Me extends React.Component {
               <option value=" ">Choose Platform</option>
               {this.getHandleOptions()}
             </select>
+          </label>
 
             <br />
             <div style={{marginTop: '.5em'}} />
@@ -227,7 +220,6 @@ class Me extends React.Component {
               onChange={this.handleUpdate}
               defaultValue={this.state[inputName]} 
             />
-          </label>
           <br />
           <div style={{marginTop: '1em'}} />
         </div>)

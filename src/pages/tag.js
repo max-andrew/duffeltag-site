@@ -20,7 +20,6 @@ class Tag extends React.Component {
 		this.setState({pageTag: pageTag})
 
 		this.handleLogInAnon().then(() => { this.loadValuesToState(pageTag)})
-		// .then(logOutAnon())
 
 		this.tagExists(pageTag)
 	}

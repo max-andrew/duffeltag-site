@@ -83,7 +83,6 @@ export const getDocWhere = (key,value) => {
           resolve(items)
         }
       })
-      // .then(doWork.bind(null, 'text'))
       .catch(err => console.error(`Failed to find documents: ${err}`))
   })
 }
