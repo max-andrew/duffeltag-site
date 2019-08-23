@@ -116,6 +116,7 @@ export const resetRequest = email => {
 
     emailPassClient.sendResetPasswordEmail(email).then(() => {
       console.log("Successfully sent password reset email!");
+      navigate('/login')
     }).catch(err => {
       console.log("Error sending password reset email:", err);
     });
