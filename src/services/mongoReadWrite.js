@@ -2,7 +2,6 @@ import { isBrowser, getUserId, isLoggedIn, loginAnonymous, logoutCurrentUser } f
 
 // Wrap the require in check for window
 if (isBrowser()) {
-
   const {
     Stitch,
     RemoteMongoClient
@@ -16,7 +15,6 @@ if (isBrowser()) {
 
   const db = client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('duffeltag')
   const usersCollection = db.collection('users')
-
 }
 
 /* DATABASE OPERATIONS */
