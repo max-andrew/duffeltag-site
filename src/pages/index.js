@@ -18,7 +18,7 @@ const IndexPage = () => (
           profiles with just one username. That’s handy.
         </h3>
         <button>
-          <OutboundLink style={{ color: 'white', padding: '.25rem .125em', fontSize: '1.125rem' }} href="/me">
+          <OutboundLink style={{ color: 'white', padding: '.25rem .125em', fontSize: '1.125rem' }} href="/login">
             GET DUFFELTAG
           </OutboundLink>
         </button>

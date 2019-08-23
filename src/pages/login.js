@@ -6,9 +6,18 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 class Login extends React.Component {
-  state = {
-    username: ``,
-    password: ``
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: ``,
+      password: ``
+    }
+  }
+
+  componentDidMount() {
+    if (isLoggedIn()) {
+      navigate(`/me`)
+    }
   }
 
   handleUpdate = event => {
@@ -23,10 +32,6 @@ class Login extends React.Component {
   }
 
   render() {
-    if (isLoggedIn()) {
-      navigate(`/me`)
-    }
-
     return (
       <Layout>
         <SEO title="Log In" />
