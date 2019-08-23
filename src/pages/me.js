@@ -122,7 +122,7 @@ class Me extends React.Component {
   // determine if tag follows rules and is not taken
   async tagIsAvailable() {
     // get tag from state
-    const tag = this.state.tag
+    var tag = this.state.tag
 
     // make lowercase
     tag = tag.toLowerCase()
