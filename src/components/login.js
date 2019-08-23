@@ -1,11 +1,12 @@
 import React from "react"
 import { navigate } from "gatsby"
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
 import { handleLogin, isLoggedIn } from "../services/auth"
 
 class Login extends React.Component {
   state = {
     username: ``,
-    password: ``,
+    password: ``
   }
 
   handleUpdate = event => {
@@ -20,9 +21,9 @@ class Login extends React.Component {
   }
 
   render() {
-    if (isLoggedIn()) {
-      navigate(`/app/profile`)
-    }
+    /*if (isLoggedIn()) {
+      navigate(`/tag`)
+    }*/
 
     return (
       <>
@@ -31,23 +32,38 @@ class Login extends React.Component {
           method="post"
           onSubmit={event => {
             this.handleSubmit(event)
-            navigate(`/app/profile`)
+            navigate(`/tag`)
           }}
         >
           <label>
-            Username
-            <input type="text" name="username" onChange={this.handleUpdate} />
+            Email {" "}
+            <br />
+            <input type="email" name="email" onChange={this.handleUpdate} />
           </label>
+          <br /><br />
           <label>
-            Password
+            Password {" "}
+            <br />
             <input
               type="password"
               name="password"
               onChange={this.handleUpdate}
             />
           </label>
+          <br /><br />
           <input type="submit" value="Log In" />
         </form>
+        <OutboundLink style={{ textDecoration: 'underline', color: 'white', padding: '.25rem .125em', fontSize: '1rem' }} href="/join">
+          Sign up
+        </OutboundLink>
+        {' | '}
+        <OutboundLink style={{ textDecoration: 'underline', color: 'white', padding: '.25rem .125em', fontSize: '1rem' }} href="/resetRequest">
+          Forgot password
+        </OutboundLink>
+        <br />
+        <OutboundLink style={{ textDecoration: 'underline', color: 'white', padding: '.25rem .125em', fontSize: '1rem' }} href="/resend">
+          Resend Activation Email
+        </OutboundLink>
       </>
     )
   }

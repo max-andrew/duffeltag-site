@@ -5,15 +5,6 @@ module.exports = {
     author: `Duffeltag`,
   },
   plugins: [
-    {
-      resolve: `gatsby-source-mongodb`,
-      options: { 
-        auth: { user: `max`, password: `kJi505C&iin4` },
-        server: { address: `cluster0-z5eqg.mongodb.net` },
-        dbName: `duffeltag`, 
-        collection: `users`, 
-      },
-    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-google-analytics`,
@@ -42,8 +33,16 @@ module.exports = {
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-source-mongodb`,
+      options: { 
+        connectionString: `mongodb+srv://max:kJi505C&iin4@cluster0-z5eqg.mongodb.net`,
+        dbName: `duffeltag`, 
+        collection: `users`, 
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }

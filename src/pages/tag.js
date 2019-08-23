@@ -1,44 +1,103 @@
 import React from "react"
-import { graphql } from "gatsby"
-import { Link } from "gatsby"
-import { getUser, isLoggedIn } from "../services/auth"
-
+import { navigate, graphql } from "gatsby"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import NavBar from "../components/nav-bar"
 import BlankTag from "../components/blank_tag"
+import { getUser, isLoggedIn, loginAnonymous, logOutAnon, logoutCurrentUser } from "../services/auth"
+import { isDocWhere, getDocWhere } from "../services/mongoReadWrite"
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
+import SEO from "../components/seo"
 
-export default ({ data }) => (
-  <Layout>
-    <SEO title="Reserve Tag" />
-    <NavBar />
-    <h1>Hello {isLoggedIn() ? getUser().name : "world"}!</h1>
-    <p>
-      {isLoggedIn() ? (
-        <>
-          <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-            <BlankTag />
-          </div>
-          You are logged in, so check your{" "}
-          <Link to="/app/profile">profile</Link>
-        </>
-      ) : (
-        <>
-          You should <Link to="/app/login">log in</Link> to see restricted
-          content
-        </>
-      )}
-    </p>
-    <p>About {data.site.siteMetadata.title}</p>
-  </Layout>
-)
+class Tag extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {}
+	}
 
-export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
+	componentDidMount() {
+		// get tag from url
+		const urlArray = window.location.href.split("/")
+		const pageTag = urlArray[urlArray.indexOf("tag")+1]
+		this.setState({pageTag: pageTag})
+
+		this.handleLogInAnon().then(() => { this.loadValuesToState(pageTag)})
+		// .then(logOutAnon())
+
+		this.tagExists(pageTag)
+	}
+
+	// if tag does not exist display error
+
+	/* HELPER FUNCTIONS */
+	async loadValuesToState(tag) {
+		getDocWhere("tag",tag)
+		.then((value) => {
+			Object.keys(value[0]).forEach(key => {
+				this.setState({ [key]: value[0][key] })
+			})
+		})
+	}
+
+	async handleLogInAnon() {
+		if (!isLoggedIn()) {
+			return await loginAnonymous()
+		}
+	}
+
+	async tagExists(tag) {
+		const isDoc = await isDocWhere("tag",tag)
+		if (!isDoc)
+			navigate('/')
+	}
+
+  render() {
+  	return (
+	<Layout>
+		<SEO title="Tag" />
+		<div className="publicDuffeltag" style={{position:'relative', margin: '0 auto', width:'19rem'}}>
+			<div className="tagText userFirstLastName">
+				<p>{this.state.fname}{" "}{this.state.lname}</p>
+			</div>
+			<div className="tagText topTagRow">
+				<p className="smallCaps platformName">{this.state.platform0}</p>
+			</div>
+			<div className="tagText topUserHandleRow">
+				<p className="userHandle">{this.state.handle0}</p>
+			</div>
+			<div className="tagText topTagRow rightColumn">
+				<p className="smallCaps platformName">{this.state.platform1}</p>
+			</div>
+			<div className="tagText topUserHandleRow rightColumn">
+				<p className="userHandle">{this.state.handle1}</p>
+			</div>
+			<div className="tagText secondTagRow">
+				<p className="smallCaps platformName">{this.state.platform2}</p>
+			</div>
+			<div className="tagText secondUserHandleRow">
+				<p className="userHandle">{this.state.handle2}</p>
+			</div>
+			<div className="tagText secondTagRow rightColumn">
+				<p className="smallCaps platformName">{this.state.platform3}</p>
+			</div>
+			<div className="tagText secondUserHandleRow rightColumn">
+				<p className="userHandle">{this.state.handle3}</p>
+			</div>
+			<div className="tagText userDuffeltag">
+				<p>{this.state.pageTag}</p>
+			</div>
+
+			<BlankTag />
+
+			<br />
+			<div style={{marginTop: '.5em'}} />
+			<div style={{width: '100%', textAlign: 'center'}}>
+		      <OutboundLink style={{ color: 'white', textDecoration: 'underline' }} href="/me">
+		        Get my tag
+		      </OutboundLink>
+			</div>
+		</div>
+	</Layout>
+    )
   }
-`
+}
+
+export default Tag

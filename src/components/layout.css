@@ -24,37 +24,6 @@
   src: url("../fonts/apercu/Apercu-Bold.otf");
 }
 
-/* Custom classes */
-html {
-  background-image: url("../images/big_shaded_shapes.png");
-  background-size: cover;
-}
-
-.container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  max-width: 850px;
-  margin-bottom: 1.45rem;
-}
-
-.item1 {
-  max-width: 350px;
-  display: inline;
-  margin: 1.45rem;
-  margin-top: 0;
-}
-
-.item2 {
-  max-width: 250px;
-  /* height: 100px; */
-  width: fit-content;
-  min-width: 200px;
-  flex: 1;
-  margin: 0 auto;
-  align-self: center;
-}
-
 /* Standard layout */
 html {
   font-family: "Apercu-Med", sans-serif;
@@ -165,13 +134,6 @@ hr {
   height: 0;
   overflow: visible;
 }
-button {
-  background-color: #99CCFF;
-  border: none;
-  text-decoration: none;
-  padding: .5rem .75rem;
-  border-radius: 3px;
-}
 button,
 input,
 optgroup,
@@ -266,7 +228,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
+  color: white;
   font-family: "Apercu-Bold", sans-serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -685,4 +647,204 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+/* Default overwrite */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: none;
+  border-radius: 3px;
+  height: 35px;
+  padding-left: 10px;
+}
+
+input[type="text"] {
+  width: 10rem;
+}
+
+
+input[type="email"],
+input[type="password"] {
+  width: 12rem;
+}
+
+select {
+  border: none;
+  border-radius: 3px;
+  height: 35px;
+  padding-left: 10px;
+  width: 10em;
+}
+
+button,
+input[type="submit"] {
+  background-color: #99CCFF;
+  color: white;
+  border: none;
+  text-decoration: none;
+  padding: .5rem .75rem;
+  border-radius: 3px;
+}
+
+/* Custom classes */
+html {
+  background-image: url("../images/shaded_shapes.png");
+  background-size: 1500px;
+  /*background-size: 150px;*/
+  background-repeat: repeat;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  max-width: 850px;
+  margin-bottom: 1.45rem;
+}
+
+.item1 {
+  max-width: 350px;
+  display: inline;
+  margin: 1.45rem;
+  margin-top: 0;
+}
+
+.item2 {
+  max-width: 250px;
+  /* height: 100px; */
+  width: fit-content;
+  min-width: 200px;
+  flex: 1;
+  margin: 0 auto;
+  align-self: center;
+}
+
+.card {
+  background-color: rgba(153, 204, 255, .99); 
+  padding: 1.5em 2em;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.shareCard {
+  float: right;
+  max-width: 19em;
+  margin-left: 1em;
+  margin-bottom: 2em;
+}
+
+.shareCard .shareLink {
+  text-decoration: underline;
+  margin-bottom: .5em;
+}
+
+@media only screen and (max-width: 975px) {
+  .shareCard {
+    margin-left: 0em;
+    float: none;
+    margin-bottom: 2em;
+  }
+}
+
+.block {
+  float: left;
+}
+
+.block:not(:last-child) {
+  margin-right: 2em;
+}
+
+.card button,
+.card input[type="button"], 
+.card input[type="submit"] {
+  border: white 2px solid;
+  background-color: transparent;
+}
+
+.smallCaps {
+  font-family: "Apercu-Mono";
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 900;
+  margin: 0;
+  display: inline-block;
+}
+
+.shortWideButton {
+  padding: 0;
+  width: 10rem;
+  font-size: 10px;
+}
+
+.publicDuffeltag {
+  color: black;
+}
+
+.tagText {
+  position: absolute;
+  left: 2.1em;
+  z-index: 99;
+}
+
+.tagText p {
+  margin: 0;
+}
+
+.tagText .platformName {
+  fontSize: 12px;
+}
+
+.tagText .userHandle,
+.userFirstLastName p,
+.userDuffeltag p {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tagText .userHandle {
+  width: 7.75em;
+}
+
+.userFirstLastName {
+  top: 11em;
+}
+
+.userFirstLastName p {
+  font-size: 29px;
+  width: 9em;
+  text-transform: uppercase;
+}
+
+.userDuffeltag {
+  top: 24.25em;
+}
+
+.userDuffeltag p {
+  font-size: 25px;
+  width: 9em;
+  line-height: 1.25;
+  text-transform: lowercase;
+}
+
+.topTagRow {
+  top: 13.25em;
+}
+
+.topUserHandleRow {
+  top: 14.75em;
+}
+
+.secondTagRow {
+  top: 17.5em;
+}
+
+.secondUserHandleRow {
+  top: 19em;
+}
+
+.rightColumn {
+  left: 10em;
 }
