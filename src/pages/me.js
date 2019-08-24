@@ -208,6 +208,7 @@ class Me extends React.Component {
               type="text" 
               name={inputName}
               placeholder="account handle" 
+              spellcheck="false"
               autocapitalize="none"
               onChange={this.handleUpdate}
               defaultValue={this.state[inputName]} 
@@ -243,6 +244,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="tag" 
+                  spellcheck="false"
                   autocapitalize="none"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.tag} 
@@ -271,6 +273,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="fname"
+                  spellcheck="false"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.fname} 
                 />
@@ -287,6 +290,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="lname"
+                  spellcheck="false"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.lname} 
                 />
