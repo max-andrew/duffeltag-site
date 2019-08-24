@@ -16,7 +16,7 @@ class Tag extends React.Component {
 	componentDidMount() {
 		// get tag from url
 		const urlArray = window.location.href.split("/")
-		const pageTag = urlArray[urlArray.indexOf("tag")+1].toLowerCase()
+		const pageTag = urlArray[urlArray.indexOf("tag")+1]
 		this.setState({pageTag: pageTag})
 
 		this.loadValuesToState(pageTag)
