@@ -61,7 +61,9 @@ class Me extends React.Component {
     // get all input names upsert the value of each to the database
     var updateList = this.state.inputNamesToBeUpdated
     // get tag input
-    var tag = this.state.tag.toLowerCase()
+    var tag = this.state.tag
+    // make lowercase and add to state
+    await this.setState({tag: tag.toLowerCase()})
     // was tag changed
     var tagChanged = (this.state.tag !== this.state.saved_tag)
 
