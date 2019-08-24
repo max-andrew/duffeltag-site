@@ -19,6 +19,7 @@ class Tag extends React.Component {
 		const pageTag = urlArray[urlArray.indexOf("tag")+1]
 		this.setState({pageTag: pageTag})
 
+
 		this.handleLogInAnon().then(this.loadValuesToState(pageTag))
 
 		this.tagExists(pageTag)
@@ -37,8 +38,8 @@ class Tag extends React.Component {
 	}
 
 	async handleLogInAnon() {
-		if (!isLoggedIn()) {
-			return await loginAnonymous()
+		if (await !isLoggedIn()) {
+			await loginAnonymous()
 		}
 	}
 
