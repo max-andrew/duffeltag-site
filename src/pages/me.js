@@ -108,10 +108,7 @@ class Me extends React.Component {
   // determine if tag follows rules and is not taken
   async tagIsAvailable() {
     // get tag from state
-    var tag = this.state.tag
-
-    // make lowercase
-    tag = tag.toLowerCase()
+    const tag = this.state.tag.toLowerCase()
 
     // is tag proper length
     if (tag.length<3 || tag.length>18)
@@ -211,6 +208,7 @@ class Me extends React.Component {
               type="text" 
               name={inputName}
               placeholder="account handle" 
+              autocapitalize="none"
               onChange={this.handleUpdate}
               defaultValue={this.state[inputName]} 
             />
@@ -245,7 +243,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="tag" 
-                  style={{textTransform: 'lowercase'}}
+                  autocapitalize="none"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.tag} 
                 />
@@ -273,6 +271,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="fname" 
+                  autocapitalize="none"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.fname} 
                 />
@@ -289,6 +288,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="lname" 
+                  autocapitalize="none"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.lname} 
                 />
