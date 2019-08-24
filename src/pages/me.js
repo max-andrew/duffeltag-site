@@ -270,8 +270,7 @@ class Me extends React.Component {
                 <div style={{marginTop: '.1em'}} />
                 <input 
                   type="text" 
-                  name="fname" 
-                  autocapitalize="none"
+                  name="fname"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.fname} 
                 />
@@ -287,8 +286,7 @@ class Me extends React.Component {
                 <div style={{marginTop: '.1em'}} />
                 <input 
                   type="text" 
-                  name="lname" 
-                  autocapitalize="none"
+                  name="lname"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.lname} 
                 />
