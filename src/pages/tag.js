@@ -19,8 +19,7 @@ class Tag extends React.Component {
 		const pageTag = urlArray[urlArray.indexOf("tag")+1]
 		this.setState({pageTag: pageTag})
 
-
-		this.handleLogInAnon().then(this.loadValuesToState(pageTag))
+		this.loadValuesToState(pageTag)
 
 		this.tagExists(pageTag)
 	}
@@ -29,18 +28,17 @@ class Tag extends React.Component {
 
 	/* HELPER FUNCTIONS */
 	async loadValuesToState(tag) {
+		const loggedIn = await isLoggedIn()
+		if (!loggedIn) {
+			await loginAnonymous()
+		}
 		getDocWhere("tag",tag)
 		.then((value) => {
 			Object.keys(value[0]).forEach(key => {
 				this.setState({ [key]: value[0][key] })
 			})
 		})
-	}
-
-	async handleLogInAnon() {
-		if (await !isLoggedIn()) {
-			await loginAnonymous()
-		}
+		.then(logOutAnon())
 	}
 
 	async tagExists(tag) {

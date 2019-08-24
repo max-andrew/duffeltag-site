@@ -51,10 +51,12 @@ export function loginAnonymous() {
 
 export async function logOutAnon() {
   const localUser = getUser()
-  if (localUser !== undefined) {
-    if (localUser["loggedInProviderName"] === "anon-user")
-      return logoutCurrentUser()
-  }
+  return new Promise(resolve => {
+    if (localUser !== undefined) {
+      if (localUser["loggedInProviderName"] === "anon-user")
+        return logoutCurrentUser()
+    }
+  })
 }
 
 export const handleLogin = ({ email, password }) => {

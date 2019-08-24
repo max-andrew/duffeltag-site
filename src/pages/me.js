@@ -15,27 +15,23 @@ class Me extends React.Component {
     }
   }
 
-  componentWillMount() {
-    // redirect anonymous user
-    logOutAnon().then(() => {
-      if (!isLoggedIn()) {
-        navigate(`/login`)
-      }
-    })
-  }
-
   componentDidMount() {
-    if (!isLoggedIn()) {
-      navigate(`/login`)
-    }
     // preload all available inputs
-    this.loadValuesToState().then(() => this.setState({ saved_tag: this.state.tag }))
+    this.loadValuesToState()
+    .then(this.setState({ saved_tag: this.state.tag }))
 
     this.loadCurrentSavedTag()
   }
   
   /* HELPER FUNCTIONS */
   async loadValuesToState() {
+    const loggedIn = await isLoggedIn()
+    if (!loggedIn) {
+      navigate(`/login`)
+    }
+    else {
+      await logOutAnon()
+    }
     const allInputs = ["tag","fname","lname","handle0","platform0","handle1","platform1","handle2","platform2","handle3","platform3"]
     allInputs.forEach(item => {
       getValue(item)
