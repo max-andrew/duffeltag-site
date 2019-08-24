@@ -22,7 +22,7 @@ const getUsersCollection = () => {
 /* DATABASE OPERATIONS */
 
 // Update key's value for current user
-export async function updateValue(key, value) {
+export const updateValue = (key, value) => {
   const query = {owner_id: getUserId()}
   const update = { "$set": { [key]: value } }
 
@@ -32,7 +32,7 @@ export async function updateValue(key, value) {
         const { matchedCount, modifiedCount } = result
         if(matchedCount && modifiedCount) {
           console.log(`Successfully updated the item.`)
-          resolve(true)
+          resolve()
         }
       })
       .catch(err => console.error(`Failed to update the item: ${err}`))

@@ -80,11 +80,10 @@ class Me extends React.Component {
         this.setState({saved_tag:tag})
       }
     }
-
-    updateList.forEach(async inputName => {
+    for (const inputName of updateList) {
       console.log("Updating " + inputName + " to " + this.state[inputName])
       await updateValue(inputName, this.state[inputName])
-    })
+    }
     // reset list of input names to be updated
     this.setState({
       inputNamesToBeUpdated: [],
