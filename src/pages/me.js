@@ -25,15 +25,13 @@ class Me extends React.Component {
   
   /* HELPER FUNCTIONS */
   async loadValuesToState() {
+    logOutAnon()
     const loggedIn = await isLoggedIn()
-    if (!loggedIn) {
+    if (!loggedIn) 
       navigate(`/login`)
-    }
-    else {
-      await logOutAnon()
-    }
     const allInputs = ["tag","fname","lname","handle0","platform0","handle1","platform1","handle2","platform2","handle3","platform3"]
     allInputs.forEach(item => {
+      console.log(item)
       getValue(item)
       .then(value => {
         if (!!value)
