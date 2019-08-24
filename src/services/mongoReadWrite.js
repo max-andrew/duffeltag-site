@@ -22,18 +22,21 @@ const getUsersCollection = () => {
 /* DATABASE OPERATIONS */
 
 // Update key's value for current user
-export const updateValue = (key, value) => {
+export async function updateValue(key, value) {
   const query = {owner_id: getUserId()}
   const update = { "$set": { [key]: value } }
 
-  getUsersCollection().updateOne(query, update, { "upsert": true })
-    .then(result => {
-      const { matchedCount, modifiedCount } = result
-      if(matchedCount && modifiedCount) {
-        console.log(`Successfully updated the item.`)
-      }
-    })
-    .catch(err => console.error(`Failed to update the item: ${err}`))
+  return new Promise(resolve => {
+    getUsersCollection().updateOne(query, update, { "upsert": true })
+      .then(result => {
+        const { matchedCount, modifiedCount } = result
+        if(matchedCount && modifiedCount) {
+          console.log(`Successfully updated the item.`)
+          resolve(true)
+        }
+      })
+      .catch(err => console.error(`Failed to update the item: ${err}`))
+  })
 }
 
 // Get key's value for current user

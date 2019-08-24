@@ -16,12 +16,10 @@ class Tag extends React.Component {
 	componentDidMount() {
 		// get tag from url
 		const urlArray = window.location.href.split("/")
-		const pageTag = urlArray[urlArray.indexOf("tag")+1].toLowerCase()
+		const pageTag = urlArray[urlArray.indexOf("tag")+1]
 		this.setState({pageTag: pageTag})
 
 		this.loadValuesToState(pageTag)
-
-		this.tagExists(pageTag)
 	}
 
 	// if tag does not exist display error
@@ -32,6 +30,7 @@ class Tag extends React.Component {
 		if (!loggedIn) {
 			await loginAnonymous()
 		}
+		await this.tagExists(tag)
 		getDocWhere("tag",tag)
 		.then((value) => {
 			Object.keys(value[0]).forEach(key => {
@@ -43,7 +42,7 @@ class Tag extends React.Component {
 
 	async tagExists(tag) {
 		const isDoc = await isDocWhere("tag",tag)
-		if (!isDoc)
+		if (!isDoc) 
 			navigate('/')
 	}
 

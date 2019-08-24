@@ -61,7 +61,7 @@ class Me extends React.Component {
     // get all input names upsert the value of each to the database
     var updateList = this.state.inputNamesToBeUpdated
     // get tag input
-    var tag = this.state.tag
+    var tag = this.state.tag.toLowerCase()
     // was tag changed
     var tagChanged = (this.state.tag !== this.state.saved_tag)
 
@@ -81,9 +81,9 @@ class Me extends React.Component {
       }
     }
 
-    updateList.forEach(inputName => {
+    updateList.forEach(async inputName => {
       console.log("Updating " + inputName + " to " + this.state[inputName])
-      updateValue(inputName, this.state[inputName])
+      await updateValue(inputName, this.state[inputName])
     })
     // reset list of input names to be updated
     this.setState({

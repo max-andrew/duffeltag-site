@@ -99,10 +99,10 @@ export function logoutCurrentUser() {
 const logoutAll = () => getApp().auth.logout()
 
 export const handleLogout = () => {
-  logoutCurrentUser(getUserId())
-  purgeAuthInfos()
-  console.log("Successfully logged out. See ya.")
-  navigate('/login')
+  logoutCurrentUser(getUserId()).then(purgeAuthInfos()).then(() => {
+    console.log("Successfully logged out. See ya.")
+    navigate('/login')
+  })
 };
 
 const purgeAuthInfos = () =>
