@@ -1,4 +1,4 @@
-import { isBrowser, getUserId, isLoggedIn, loginAnonymous, logoutCurrentUser } from "../services/auth"
+import { isBrowser, getUserId } from "../services/auth"
 
 // Wrap the app in check for window
 const getUsersCollection = () => {
@@ -6,7 +6,7 @@ const getUsersCollection = () => {
     const {
       Stitch,
       RemoteMongoClient
-    } = require('mongodb-stitch-browser-sdk');
+    } = require('mongodb-stitch-browser-sdk')
 
     const APP_ID = "duffeltag-ceqsw"
     // Initialize client if none exists
@@ -31,7 +31,7 @@ export const updateValue = (key, value) => {
       .then(result => {
         const { matchedCount, modifiedCount } = result
         if(matchedCount && modifiedCount) {
-          console.log(`Successfully updated the item.`)
+          // console.log(`Successfully updated the item.`)
           resolve()
         }
       })
@@ -44,7 +44,7 @@ export const getValue = key => {
   return new Promise(resolve => {
     getUsersCollection().findOne({ "owner_id" : getUserId() })
       .then(item => {
-        console.log("Successfully found " + item[key])
+        // console.log("Successfully found " + item[key])
         resolve(item[key])
       })
       .catch(err => console.error(`Failed to find item: ${err}`))
@@ -56,8 +56,8 @@ export const getUserObject = id => {
   return new Promise(resolve => {
     getUsersCollection().findOne({ "owner_id" : getUserId() })
       .then(item => {
-        console.log(Object.keys(item))
-        console.log("Successfully found " + item)
+        // console.log(Object.keys(item))
+        // console.log("Successfully found " + item)
         resolve(item)
       })
       .catch(err => console.error(`Failed to find item: ${err}`))
@@ -69,7 +69,7 @@ export const isDocWhere = (key,value) => {
   return new Promise(resolve => {
     getUsersCollection().find({ [key]: value }).toArray()
       .then(items => {
-        console.log(`Successfully found ${items.length} documents.`)
+        // console.log(`Successfully found ${items.length} documents.`)
         resolve(items.length!==0)
       })
       .catch(err => console.error(`Failed to find documents: ${err}`))
@@ -81,7 +81,7 @@ export const getDocWhere = (key,value) => {
   return new Promise(resolve => {
     getUsersCollection().find({ [key]: value }).toArray()
       .then(items => {
-        console.log(`Successfully found ${items.length} documents.`)
+        // console.log(`Successfully found ${items.length} documents.`)
         if (items.length > 0) {
           resolve(items)
         }

@@ -18,7 +18,7 @@ const Header = ({ siteTitle }) => (
         <OutboundLink
           href="/"
           style={{
-            color: `white`,
+            color: `black`,
             textDecoration: `none`,
             textTransform: 'uppercase',
             fontSize: '28px',

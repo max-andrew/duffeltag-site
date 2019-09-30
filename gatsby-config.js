@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-remove-serviceworker',
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

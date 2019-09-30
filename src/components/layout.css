@@ -29,7 +29,7 @@ html {
   font-family: "Apercu-Med", sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  background-color: #99CCFF;
+  /*background-color: #99CCFF;*/
 }
 body {
   margin: 0;
@@ -655,8 +655,8 @@ input[type="email"],
 input[type="password"] {
   border: none;
   border-radius: 3px;
-  height: 35px;
-  padding-left: 10px;
+  /*height: 35px;
+  padding-left: 10px;*/
 }
 
 input[type="text"] {
@@ -666,7 +666,7 @@ input[type="text"] {
 
 input[type="email"],
 input[type="password"] {
-  width: 12rem;
+  width: 13rem;
 }
 
 select {
@@ -689,35 +689,75 @@ input[type="submit"] {
 
 /* Custom classes */
 html {
-  background-image: url("../images/shaded_shapes.png");
-  background-size: 1500px;
-  /*background-size: 150px;*/
-  background-repeat: repeat;
+  background: url("../images/shapes_bg.png") 33% -16.75%/1750px repeat;
 }
 
-.container {
+@media only screen and (max-width: 975px) {
+  html {
+    background-size: 1750px;
+    background-position: 12% 16%;
+  }
+}
+
+.homeContainer {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  flex-wrap: wrap;
   max-width: 850px;
-  margin-bottom: 1.45rem;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
 }
 
-.item1 {
+.splashPaper {
   max-width: 350px;
-  display: inline;
-  margin: 1.45rem;
-  margin-top: 0;
+  order: 1;
 }
 
-.item2 {
-  max-width: 250px;
-  /* height: 100px; */
-  width: fit-content;
-  min-width: 200px;
-  flex: 1;
-  margin: 0 auto;
+.paperContent {
+  padding: 2rem;
+}
+
+.paperContent h3 {
+  font-family: "Apercu-Bold";
+}
+
+.paperContent .MuiTypography-body1 {
+  font-family: "Apercu-Medium";
+}
+
+.splashTag {
+  order: 3;
+  width: 275px;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+  border-radius: 40px;
+}
+
+@media only screen and (max-width: 975px) {
+  .splashTag {
+    margin: 1rem 0 1rem;
+    width: 250px;
+  }
+}
+
+.splashButton {
+  width: 100%;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  order: 4;
+}
+
+@media only screen and (max-width: 975px) {
+  .splashButton {
+    order: 2;
+    margin: 1.5rem 0 1rem;
+  }
+}
+
+.splashButton .blueButton {
   align-self: center;
+  background: linear-gradient(45deg, #99CCFF, #ffff 90%);
+  font-family: "Apercu-Bold";
 }
 
 .card {
@@ -777,6 +817,8 @@ html {
   width: 10rem;
   font-size: 10px;
 }
+
+/* TAG STYLING */
 
 .publicDuffeltag {
   color: black;
@@ -847,4 +889,65 @@ html {
 
 .rightColumn {
   left: 10em;
+}
+
+/* Material UI */
+
+.centerBody {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.centerItem {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.authCardContent .MuiTypography-h5 {
+  font-family: "Apercu-Bold";
+}
+
+.authCard form {
+  display: flex;
+  margin-bottom: 0;
+  align-items: center;
+  flex-direction: column;
+}
+
+.authCardActions {
+  margin-top: .75rem;
+}
+
+.authCard form .MuiFormHelperText-root,
+.authCard form .MuiInputLabel-root,
+.authCard form .MuiInputBase-input {
+  font-family: "Apercu-Medium";
+}
+
+.authCard form .MuiInputLabel-root.Mui-focused {
+  color: black;
+}
+
+.authCard form .MuiInput-underline:after {
+  border-bottom: 2px solid black;
+}
+
+.authCard form .MuiButton-root {
+  align-self: center;
+  margin: 0 auto;
+  /*background: #99CCFF;
+  color: white;*/
+  font-family: "Apercu-Bold";
+}
+
+.authBodyLink {
+  padding-top: .5rem;
+  align-self: center;
+}
+
+.MuiTypography-body1 .authBodyLinkText {
+  color: #757575;
+  font-family: "Apercu-Medium";
 }

@@ -1,17 +1,18 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { isBrowser, isLoggedIn, handleLogout, logOutAnon } from "../services/auth"
-import { updateValue, getValue, getUserObject, isDocWhere } from "../services/mongoReadWrite"
+import { isLoggedIn, handleLogout, logOutAnon } from "../services/auth"
+import { updateValue, getValue, isDocWhere } from "../services/mongoReadWrite"
 import restrictedTags from "../components/restricted.json"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Button from '@material-ui/core/Button'
 
 class Me extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       inputNamesToBeUpdated: [],
-      supported_platforms: ["Instagram","Snapchat","Phone","Venmo","VSCO","WhatsApp","Twitter","Facebook","TikTok","Spotify"],
+      supported_platforms: ["Instagram","Snapchat","Phone","Venmo","VSCO","WhatsApp","Twitch","Slack","Discord","Twitter","Facebook","LinkedIn","TikTok","Spotify"],
     }
   }
 
@@ -64,6 +65,7 @@ class Me extends React.Component {
     var tag = this.state.tag
     // make lowercase and add to state
     await this.setState({tag: tag.toLowerCase()})
+    await this.setState({showStillAvailableMessage: true})
     // was tag changed
     var tagChanged = (this.state.tag !== this.state.saved_tag)
 
@@ -126,6 +128,7 @@ class Me extends React.Component {
         console.log("Tag restricted.");
         tagRestricted = true
       }
+      return true
     })
     if (tagRestricted)
       return false
@@ -209,8 +212,8 @@ class Me extends React.Component {
               type="text" 
               name={inputName}
               placeholder="account handle" 
-              spellcheck="false"
-              autocapitalize="none"
+              spellCheck="false"
+              autoCapitalize="none"
               onChange={this.handleUpdate}
               defaultValue={this.state[inputName]} 
             />
@@ -245,8 +248,8 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="tag" 
-                  spellcheck="false"
-                  autocapitalize="none"
+                  spellCheck="false"
+                  autoCapitalize="none"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.tag} 
                 />
@@ -274,7 +277,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="fname"
-                  spellcheck="false"
+                  spellCheck="false"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.fname} 
                 />
@@ -291,7 +294,7 @@ class Me extends React.Component {
                 <input 
                   type="text" 
                   name="lname"
-                  spellcheck="false"
+                  spellCheck="false"
                   onChange={this.handleUpdate} 
                   defaultValue={this.state.lname} 
                 />
@@ -323,13 +326,9 @@ class Me extends React.Component {
         <br />
         <div style={{marginTop: '2em'}} />
         <div style={{width: '100%', textAlign: 'center'}}>
-          <a 
-            style={{color: 'white'}} 
-            href="#" 
-            onClick={event => {handleLogout()}}
-          >
+          <Button size="small" style={{fontFamily: "Apercu-Bold"}} onClick={event => {handleLogout()}}>
             Log Out
-          </a>
+          </Button>
         </div>
       </Layout>
     )

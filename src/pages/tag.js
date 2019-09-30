@@ -1,8 +1,8 @@
 import React from "react"
-import { navigate, graphql } from "gatsby"
+import { navigate } from "gatsby"
 import Layout from "../components/layout"
 import BlankTag from "../components/blank_tag"
-import { getUser, isLoggedIn, loginAnonymous, logOutAnon, logoutCurrentUser } from "../services/auth"
+import { isLoggedIn, loginAnonymous, logOutAnon } from "../services/auth"
 import { isDocWhere, getDocWhere } from "../services/mongoReadWrite"
 import { OutboundLink } from 'gatsby-plugin-google-analytics'
 import SEO from "../components/seo"
@@ -16,8 +16,7 @@ class Tag extends React.Component {
 	componentDidMount() {
 		// get tag from url
 		const urlArray = window.location.href.split("/")
-		const pageTag = urlArray[urlArray.indexOf("tag")+1]
-		this.setState({pageTag: pageTag})
+		var pageTag = urlArray[urlArray.indexOf("tag")+1]
 
 		this.loadValuesToState(pageTag)
 	}
@@ -26,6 +25,8 @@ class Tag extends React.Component {
 
 	/* HELPER FUNCTIONS */
 	async loadValuesToState(tag) {
+		// convert tag to lowercase
+		// tag = tag.toLowerCase()
 		const loggedIn = await isLoggedIn()
 		if (!loggedIn) {
 			await loginAnonymous()
@@ -36,6 +37,7 @@ class Tag extends React.Component {
 			Object.keys(value[0]).forEach(key => {
 				this.setState({ [key]: value[0][key] })
 			})
+			this.setState({pageTag: tag})
 		})
 		.then(logOutAnon())
 	}
