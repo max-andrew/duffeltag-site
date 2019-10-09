@@ -1,17 +1,12 @@
 import React from "react"
 import { navigate } from "gatsby"
 import Layout from "../components/layout"
-import BlankTag from "../components/blank_tag"
 import { isLoggedIn, loginAnonymous, logOutAnon } from "../services/auth"
 import { isDocWhere, getDocWhere } from "../services/mongoReadWrite"
-import { OutboundLink } from 'gatsby-plugin-google-analytics'
 import SEO from "../components/seo"
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
 import Grow from '@material-ui/core/Grow'
 import Slide from '@material-ui/core/Slide'
 import Link from '@material-ui/core/Link'
