@@ -5,14 +5,24 @@ import { updateValue, getValue, isDocWhere } from "../services/mongoReadWrite"
 import restrictedTags from "../components/restricted.json"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Paper from '@material-ui/core/Paper'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import Grow from '@material-ui/core/Grow'
+import { ThemeProvider } from '@material-ui/styles'
 
 class Me extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       inputNamesToBeUpdated: [],
-      supported_platforms: ["Instagram","Snapchat","Phone","Venmo","VSCO","WhatsApp","Twitch","Slack","Discord","Twitter","Facebook","LinkedIn","TikTok","Spotify"],
+      supported_platforms: ["Instagram","Snapchat","Phone","Venmo","VSCO","WhatsApp",
+      						"Twitch","Slack","Discord","Twitter","Facebook","LinkedIn",
+      						"TikTok","Spotify"],
     }
   }
 
@@ -30,9 +40,9 @@ class Me extends React.Component {
     const loggedIn = await isLoggedIn()
     if (!loggedIn) 
       navigate(`/login`)
-    const allInputs = ["tag","fname","lname","handle0","platform0","handle1","platform1","handle2","platform2","handle3","platform3"]
+    const allInputs = ["tag","fname","lname","handle0","platform0","handle1",
+    					"platform1","handle2","platform2","handle3","platform3"]
     allInputs.forEach(item => {
-      console.log(item)
       getValue(item)
       .then(value => {
         if (!!value)
@@ -55,6 +65,10 @@ class Me extends React.Component {
       list.push(item)
 
     return list
+  }
+
+  getUserFirstName() {
+    return this.state.fname
   }
 
   // for all values edited by user, update to db
@@ -159,30 +173,19 @@ class Me extends React.Component {
     })
   }
 
-  handleAvailability = () => this.tagIsAvailable().then(item => this.setState({ showStillAvailableMessage: true, tagAvailable: item }))
+  handleAvailability = () => 
+  	this.tagIsAvailable()
+  	.then(item => this.setState({ showStillAvailableMessage: true, tagAvailable: item }))
 
   render() {
-    const getShareCard = () => {
-      return this.hasTag() ?  
-        <div>
-          <div className="card shareCard">
-            <h2><span role="img" aria-label="send">✉️</span>  Share tag</h2>
-            <h3 className="shareLink">dffl.me/{this.state.saved_tag}</h3>
-            <p>Share this link to your Duffeltag in person, in bios, in DMs... anywhere!</p>
-            <button onClick={event => { navigate('/tag/'+this.state.saved_tag) }}>SEE MY TAG</button>
-          </div>
-        </div>
-      : <div />
-    }
-
-    const getAvailabilityMessage = () => { 
-      if (this.state.showStillAvailableMessage) {
-        return this.state.tagAvailable ? 
-        <p style={{fontSize: '10px'}} className="smallCaps">Available</p> 
-      : <p style={{fontSize: '10px'}} className="smallCaps">Sorry, unavailable</p>  
-      }
-      return null
-    }
+	const getAvailabilityMessage = () => { 
+		if (this.state.showStillAvailableMessage)
+			return this.state.tagAvailable ? 
+				<p style={{fontSize: '10px'}} className="smallCaps">Available</p> 
+				: <p style={{fontSize: '10px'}} className="smallCaps">Sorry, unavailable</p>
+				
+		return null
+	}
 
     const getHandleBars = () => {
       var rows = [];
@@ -224,113 +227,165 @@ class Me extends React.Component {
       return rows
     }
 
+    const getShareCardTitle = () => {
+	  	return !!this.state.tag ?
+	  		<Typography variant="h4">
+				<span role="img" aria-label="welcome">✉️</span>
+				{" "} Share your tag!
+			</Typography>
+			: <Typography variant="h4">
+				<span role="img" aria-label="welcome">👋</span>
+				{" "} Welcome to Duffeltag!
+			</Typography>
+  	}
+
+  	const getShareCardBodyText = () => { 
+		return !!this.state.tag ? 
+			<div>
+				<Typography variant="h6">duffeltag.me/{this.state.saved_tag}</Typography>
+				<br />
+				<Typography variant="body1">
+					Share this link in person, in bios, in DMs... anywhere!
+				</Typography>
+
+			</div>
+			: <Typography variant="body1">
+				Add your Duffeltag below to get started!
+			</Typography>
+
+		return null
+	}
+
     return (
-      <Layout>
-        <SEO title="Me" />
-        <h1>My Duffeltag</h1>
+        <Layout>
+          <SEO title="Me" />
+          <div className="centerBody">
 
-        {getShareCard()}
+			<Grow in={true} style={{ maxWidth: "25em"}} mountOnEnter unmountOnExit>
+				<Paper className="shareCard">
+					<div className="paperContent">
+						{getShareCardTitle()}
+						<br />
+						{getShareCardBodyText()}
+					</div>
+				</Paper>
+			</Grow>
 
-        <div className="card" style={{ maxWidth: '28em' }}>
-          <h2><span role="img" aria-label="tag">🏷️</span>  Update tag</h2>
-          <div style={{clear:'left'}} />
-          <div className="formBody">
-            <div style={{marginTop: '.5em'}} />
+			<br />
 
-            <p className="smallCaps">My tag</p>
-            <div style={{marginTop: '.5em'}} />
+            <div className="card" style={{ padding: "1em", borderRadius: "30px", backgroundColor: "#99CCFF", maxWidth: '28em' }}>
+              <h2><span role="img" aria-label="tag">🏷️</span>  Update tag</h2>
+              <div style={{clear:'left'}} />
+              <div className="formBody">
+                <div style={{marginTop: '.5em'}} />
 
-            <div className="block">
-              <label>
-                Duffeltag {" "}
+                <p className="smallCaps">My tag</p>
+                <div style={{marginTop: '.5em'}} />
+
+                <div className="block">
+                  <label>
+                    Duffeltag {" "}
+                    <br />
+                    <div style={{marginTop: '.1em'}} />
+                    <input 
+                      type="text" 
+                      name="tag" 
+                      spellCheck="false"
+                      autoCapitalize="none"
+                      onChange={this.handleUpdate} 
+                      defaultValue={this.state.tag} 
+                    />
+                  </label>
+
+                  <br />
+                  {getAvailabilityMessage()}
+                  <div style={{marginTop: '.25em'}} />
+                  <button 
+                  	className="shortWideButton" 
+                  	onClick={this.handleAvailability}>
+                  		CHECK AVAILABILITY
+                  </button>
+                  <br />
+                  <div style={{marginTop: '1em'}} />
+                </div>
+
+                <div style={{clear:'left'}} />
+                <div style={{marginTop: '.5em'}} />
+
+                <p className="smallCaps">My name</p>
+                <div style={{marginTop: '.5em'}} />
+
+                <div className="block">
+                  <label>
+                    First Name {" "}
+                    <br />
+                    <div style={{marginTop: '.1em'}} />
+                    <input 
+                      type="text" 
+                      name="fname"
+                      spellCheck="false"
+                      onChange={this.handleUpdate} 
+                      defaultValue={this.state.fname} 
+                    />
+                  </label>
+                  <br />
+                  <div style={{marginTop: '1em'}} />
+                </div>
+
+                <div className="block">
+                  <label>
+                    Last Name {" "}
+                    <br />
+                    <div style={{marginTop: '.1em'}} />
+                    <input 
+                      type="text" 
+                      name="lname"
+                      spellCheck="false"
+                      onChange={this.handleUpdate} 
+                      defaultValue={this.state.lname} 
+                    />
+                  </label>
+                  <br />
+                  <div style={{marginTop: '1em'}} />
+                </div>
+
+                <div style={{clear:'left'}} />
+                <div style={{marginTop: '.5em'}} />
+
+                <p className="smallCaps">My handles</p>
+                <div style={{marginTop: '.5em'}} />
+
+                {getHandleBars()}
+
+                <div style={{clear:'left'}} />
+                <div style={{marginTop: '1.5em'}} />
+
+                <button onClick={event => {this.updateUser()}}>UPDATE</button>
                 <br />
-                <div style={{marginTop: '.1em'}} />
-                <input 
-                  type="text" 
-                  name="tag" 
-                  spellCheck="false"
-                  autoCapitalize="none"
-                  onChange={this.handleUpdate} 
-                  defaultValue={this.state.tag} 
-                />
-              </label>
-
-              <br />
-              {getAvailabilityMessage()}
-              <div style={{marginTop: '.25em'}} />
-              <button className="shortWideButton" onClick={this.handleAvailability}>CHECK AVAILABILITY</button>
-              <br />
-              <div style={{marginTop: '1em'}} />
+                { this.state.showTagUpdatedMessage ? 
+                  <p style={{fontSize: '10px'}} className="smallCaps">
+                    Tag updated
+                  </p> 
+                  : null }
+              </div>
             </div>
 
-            <div style={{clear:'left'}} />
-            <div style={{marginTop: '.5em'}} />
-
-            <p className="smallCaps">My name</p>
-            <div style={{marginTop: '.5em'}} />
-
-            <div className="block">
-              <label>
-                First Name {" "}
-                <br />
-                <div style={{marginTop: '.1em'}} />
-                <input 
-                  type="text" 
-                  name="fname"
-                  spellCheck="false"
-                  onChange={this.handleUpdate} 
-                  defaultValue={this.state.fname} 
-                />
-              </label>
-              <br />
-              <div style={{marginTop: '1em'}} />
-            </div>
-
-            <div className="block">
-              <label>
-                Last Name {" "}
-                <br />
-                <div style={{marginTop: '.1em'}} />
-                <input 
-                  type="text" 
-                  name="lname"
-                  spellCheck="false"
-                  onChange={this.handleUpdate} 
-                  defaultValue={this.state.lname} 
-                />
-              </label>
-              <br />
-              <div style={{marginTop: '1em'}} />
-            </div>
-
-            <div style={{clear:'left'}} />
-            <div style={{marginTop: '.5em'}} />
-
-            <p className="smallCaps">My handles</p>
-            <div style={{marginTop: '.5em'}} />
-
-            {getHandleBars()}
-
-            <div style={{clear:'left'}} />
-            <div style={{marginTop: '1.5em'}} />
-
-            <button onClick={event => {this.updateUser()}}>UPDATE</button>
             <br />
-            { this.state.showTagUpdatedMessage ? 
-              <p style={{fontSize: '10px'}} className="smallCaps">
-                Tag updated
-              </p> 
-              : null }
+
+            <div style={{marginTop: '2em'}} />
+            <div style={{width: '100%', textAlign: 'center'}}>
+              <Button 
+              	size="small" 
+              	style={{fontFamily: "Apercu-Bold"}} 
+              	onClick={event => {handleLogout()}}
+              >
+                Log Out
+              </Button>
+            </div>
+
           </div>
-        </div>
-        <br />
-        <div style={{marginTop: '2em'}} />
-        <div style={{width: '100%', textAlign: 'center'}}>
-          <Button size="small" style={{fontFamily: "Apercu-Bold"}} onClick={event => {handleLogout()}}>
-            Log Out
-          </Button>
-        </div>
-      </Layout>
+        </Layout>
+      
     )
   }
 }
