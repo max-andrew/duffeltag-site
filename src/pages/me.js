@@ -247,7 +247,10 @@ class Me extends React.Component {
 				<Typography variant="body1">
 					Share this link in person, in bios, in DMs... anywhere!
 				</Typography>
-
+				<br />
+				<Button onClick={event => { navigate('/tag/'+this.state.saved_tag) }}>
+					SEE MY TAG
+				</Button>
 			</div>
 			: <Typography variant="body1">
 				Add your Duffeltag below to get started!

@@ -89,8 +89,8 @@ class Tag extends React.Component {
 			<br />
 			<div style={{marginTop: '.5em'}} />
 			<div style={{width: '100%', textAlign: 'center'}}>
-		      <OutboundLink style={{ color: 'white', textDecoration: 'underline' }} href="/me">
-		        Get my tag
+		      <OutboundLink style={{ color: 'black', textDecoration: 'underline' }} href="/me">
+		        Get your tag
 		      </OutboundLink>
 			</div>
 		</div>
