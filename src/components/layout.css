@@ -775,92 +775,29 @@ html {
   background-color: transparent;
 }
 
-.smallCaps {
-  font-family: "Apercu-Mono";
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 900;
-  margin: 0;
-  display: inline-block;
-}
-
 .shortWideButton {
   padding: 0;
   width: 10rem;
   font-size: 10px;
 }
 
-/* TAG STYLING */
-
-.publicDuffeltag {
-  color: black;
-}
-
-.tagText {
-  position: absolute;
-  left: 2.1em;
-  z-index: 99;
-}
-
-.tagText p {
-  margin: 0;
-}
-
-.tagText .platformName {
-  fontSize: 12px;
-}
-
-.tagText .userHandle,
-.userFirstLastName p,
-.userDuffeltag p {
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.tagText .userHandle {
-  width: 7.75em;
-}
-
-.userFirstLastName {
-  top: 11em;
-}
-
-.userFirstLastName p {
-  font-size: 29px;
-  width: 9em;
+/* Tag styling */
+.tagCardContent .smallCaps {
+  font-family: "Apercu-Mono";
   text-transform: uppercase;
 }
 
-.userDuffeltag {
-  top: 24.25em;
+.tagCardContent .platformTag {
+  font-family: "Apercu-Medium";
 }
 
-.userDuffeltag p {
-  font-size: 25px;
-  width: 9em;
-  line-height: 1.25;
-  text-transform: lowercase;
+.tagCardContent .tagFullName {
+  font-family: "Apercu-Bold";
+  text-transform: uppercase;
 }
 
-.topTagRow {
-  top: 13.25em;
-}
-
-.topUserHandleRow {
-  top: 14.75em;
-}
-
-.secondTagRow {
-  top: 17.5em;
-}
-
-.secondUserHandleRow {
-  top: 19em;
-}
-
-.rightColumn {
-  left: 10em;
+.tagCardContent .userDuffeltag {
+  text-align: center;
 }
 
 /* Material UI */
@@ -877,7 +814,12 @@ html {
   flex-direction: column;
 }
 
-.authCardContent .MuiTypography-h5 {
+.authCardContent .MuiTypography-h1,
+.authCardContent .MuiTypography-h2,
+.authCardContent .MuiTypography-h3,
+.authCardContent .MuiTypography-h4,
+.authCardContent .MuiTypography-h5,
+.authCardContent .MuiTypography-h6, {
   font-family: "Apercu-Bold";
 }
 
@@ -924,4 +866,9 @@ html {
 .MuiTypography-body1 .authBodyLinkText {
   color: #757575;
   font-family: "Apercu-Medium";
+}
+
+.tagFullName .MuiTypography-h2 {
+  font-family: "Apercu-Bold";
+  text-transform: uppercase;
 }

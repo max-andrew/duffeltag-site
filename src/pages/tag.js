@@ -6,6 +6,15 @@ import { isLoggedIn, loginAnonymous, logOutAnon } from "../services/auth"
 import { isDocWhere, getDocWhere } from "../services/mongoReadWrite"
 import { OutboundLink } from 'gatsby-plugin-google-analytics'
 import SEO from "../components/seo"
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+import Grow from '@material-ui/core/Grow'
+import Slide from '@material-ui/core/Slide'
+import Link from '@material-ui/core/Link'
 
 class Tag extends React.Component {
 	constructor(props) {
@@ -52,48 +61,61 @@ class Tag extends React.Component {
   	return (
 	<Layout>
 		<SEO title="Tag" />
-		<div className="publicDuffeltag" style={{position:'relative', margin: '0 auto', width:'19rem'}}>
-			<div className="tagText userFirstLastName">
-				<p>{this.state.fname}{" "}{this.state.lname}</p>
-			</div>
-			<div className="tagText topTagRow">
-				<p className="smallCaps platformName">{this.state.platform0}</p>
-			</div>
-			<div className="tagText topUserHandleRow">
-				<p className="userHandle">{this.state.handle0}</p>
-			</div>
-			<div className="tagText topTagRow rightColumn">
-				<p className="smallCaps platformName">{this.state.platform1}</p>
-			</div>
-			<div className="tagText topUserHandleRow rightColumn">
-				<p className="userHandle">{this.state.handle1}</p>
-			</div>
-			<div className="tagText secondTagRow">
-				<p className="smallCaps platformName">{this.state.platform2}</p>
-			</div>
-			<div className="tagText secondUserHandleRow">
-				<p className="userHandle">{this.state.handle2}</p>
-			</div>
-			<div className="tagText secondTagRow rightColumn">
-				<p className="smallCaps platformName">{this.state.platform3}</p>
-			</div>
-			<div className="tagText secondUserHandleRow rightColumn">
-				<p className="userHandle">{this.state.handle3}</p>
-			</div>
-			<div className="tagText userDuffeltag">
-				<p>{this.state.pageTag}</p>
-			</div>
-
-			<BlankTag />
-
-			<br />
-			<div style={{marginTop: '.5em'}} />
-			<div style={{width: '100%', textAlign: 'center'}}>
-		      <OutboundLink style={{ color: 'black', textDecoration: 'underline' }} href="/me">
-		        Get your tag
-		      </OutboundLink>
-			</div>
-		</div>
+		<div className="centerBody">
+		<Grow in={true} mountOnEnter unmountOnExit>
+			<Card className="centerItem authCard">
+				<CardContent className="tagCardContent">
+					<Typography className="tagFullName" variant="h3">
+						{this.state.fname}{" "}{this.state.lname}
+					</Typography>
+					<br />
+					<Typography className="smallCaps" variant="body2">
+						{this.state.platform0}
+					</Typography>
+					<Typography className="platformTag" variant="h5">
+						{this.state.handle0}
+					</Typography>
+					<br />
+					<Typography className="smallCaps" variant="body2">
+						{this.state.platform1}
+					</Typography>
+					<Typography className="platformTag" variant="h5">
+						{this.state.handle1}
+					</Typography>
+					<br />
+					<Typography className="smallCaps" variant="body2">
+						{this.state.platform2}
+					</Typography>
+					<Typography className="platformTag" variant="h5">
+						{this.state.handle2}
+					</Typography>
+					<br />
+					<Typography className="smallCaps" variant="body2">
+						{this.state.platform3}
+					</Typography>
+					<Typography className="platformTag" variant="h5">
+						{this.state.handle3}
+					</Typography>
+					<br />
+					<Typography className="platformTag userDuffeltag" variant="h5">
+						{this.state.pageTag}
+					</Typography>
+				</CardContent>
+			</Card>
+		</Grow>
+        <Slide direction="up" in={true} mountOnEnter unmountOnExit>
+			<Typography className="authBodyLink">
+				<Link
+					component="button"
+					variant="body2"
+					className="authBodyLinkText"
+					href="/me"
+				>
+					Get your tag
+				</Link>
+			</Typography>
+        </Slide>
+        </div>
 	</Layout>
     )
   }
