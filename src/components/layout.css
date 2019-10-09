@@ -29,7 +29,6 @@ html {
   font-family: "Apercu-Med", sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  /*background-color: #99CCFF;*/
 }
 body {
   margin: 0;
@@ -679,8 +678,6 @@ select {
 
 button,
 input[type="submit"] {
-  background-color: #99CCFF;
-  color: white;
   border: none;
   text-decoration: none;
   padding: .5rem .75rem;
@@ -689,13 +686,13 @@ input[type="submit"] {
 
 /* Custom classes */
 html {
-  background: url("../images/shapes_bg.png") 33% -16.75%/1750px repeat;
+  background: url("../images/shapes_bg.png") 65% 26%/1750px repeat;
 }
 
 @media only screen and (max-width: 975px) {
   html {
     background-size: 1750px;
-    background-position: 12% 16%;
+    background-position: 17% 8%;
   }
 }
 
@@ -717,7 +714,10 @@ html {
   padding: 2rem;
 }
 
-.paperContent h3 {
+.paperContent h3,
+.paperContent h4 {
+  font-family: "Apercu-Bold";
+} {
   font-family: "Apercu-Bold";
 }
 
@@ -758,34 +758,6 @@ html {
   align-self: center;
   background: linear-gradient(45deg, #99CCFF, #ffff 90%);
   font-family: "Apercu-Bold";
-}
-
-.card {
-  background-color: rgba(153, 204, 255, .99); 
-  padding: 1.5em 2em;
-  border-radius: 10px;
-  display: inline-block;
-  margin: 0 auto;
-}
-
-.shareCard {
-  float: right;
-  max-width: 19em;
-  margin-left: 1em;
-  margin-bottom: 2em;
-}
-
-.shareCard .shareLink {
-  text-decoration: underline;
-  margin-bottom: .5em;
-}
-
-@media only screen and (max-width: 975px) {
-  .shareCard {
-    margin-left: 0em;
-    float: none;
-    margin-bottom: 2em;
-  }
 }
 
 .block {
@@ -909,6 +881,10 @@ html {
   font-family: "Apercu-Bold";
 }
 
+.authCard .MuiCardContent-root:last-child {
+  padding-bottom: 16px;
+}
+
 .authCard form {
   display: flex;
   margin-bottom: 0;
@@ -916,14 +892,14 @@ html {
   flex-direction: column;
 }
 
-.authCardActions {
-  margin-top: .75rem;
-}
-
 .authCard form .MuiFormHelperText-root,
 .authCard form .MuiInputLabel-root,
 .authCard form .MuiInputBase-input {
   font-family: "Apercu-Medium";
+}
+
+.authCardActions {
+  margin-top: .75rem;
 }
 
 .authCard form .MuiInputLabel-root.Mui-focused {
@@ -937,8 +913,6 @@ html {
 .authCard form .MuiButton-root {
   align-self: center;
   margin: 0 auto;
-  /*background: #99CCFF;
-  color: white;*/
   font-family: "Apercu-Bold";
 }
 

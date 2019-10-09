@@ -166,7 +166,7 @@ const newUserFail = (thisPage,email,error) => {
     thisPage.setState({
       authFormShowLogin: true,
       emailError: false,
-      emailHelpText: "Account exists, try logging in",
+      emailHelpText: "Account exists, try again",
       passwordHelpText: "",
       passwordError: false
     })
@@ -176,7 +176,7 @@ const newUserFail = (thisPage,email,error) => {
     thisPage.setState({
       authFormShowLogin: true,
       emailError: false,
-      emailHelpText: "Email confirmed, try logging in",
+      emailHelpText: "Email confirmed, try again",
       passwordHelpText: "",
       passwordError: false
     })
