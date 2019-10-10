@@ -15,6 +15,48 @@ import Button from '@material-ui/core/Button'
 import Grow from '@material-ui/core/Grow'
 import { ThemeProvider } from '@material-ui/styles'
 
+import Apercu from '../fonts/apercu/Apercu-Medium.otf'
+import { createMuiTheme } from '@material-ui/core/styles'
+
+const apercu = {
+  fontFamily: 'Apercu',
+  fontStyle: 'normal',
+  fontDisplay: 'swap',
+  fontWeight: 400,
+  src: `
+    local('Apercu'),
+    local('Apercu-Medium'),
+    url(${Apercu}) format('otf')
+  `,
+  unicodeRange: 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
+}
+
+const DuffeltagTheme = createMuiTheme({
+  typography: {
+	fontFamily: [
+    	'Apercu', 
+    	'Avenir', 
+		'-apple-system',
+		'BlinkMacSystemFont',
+		'"Segoe UI"',
+		'Roboto',
+		'"Helvetica Neue"',
+		'Arial',
+		'sans-serif',
+		'"Apple Color Emoji"',
+		'"Segoe UI Emoji"',
+		'"Segoe UI Symbol"',
+	].join(','),
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '@font-face': [apercu],
+      },
+    },
+  },
+})
+
 class Me extends React.Component {
   constructor(props) {
     super(props)
@@ -261,6 +303,7 @@ class Me extends React.Component {
 
     return (
         <Layout>
+        <ThemeProvider theme={DuffeltagTheme}>
           <SEO title="Me" />
           <div className="centerBody">
 
@@ -387,6 +430,7 @@ class Me extends React.Component {
             </div>
 
           </div>
+          </ThemeProvider>
         </Layout>
       
     )
