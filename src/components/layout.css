@@ -721,10 +721,6 @@ html {
   font-family: "Apercu-Bold";
 }
 
-.paperContent .MuiTypography-body1 {
-  font-family: "Apercu-Medium";
-}
-
 .splashTag {
   order: 3;
   width: 275px;
@@ -787,10 +783,6 @@ html {
   text-transform: uppercase;
 }
 
-.tagCardContent .platformTag {
-  font-family: "Apercu-Medium";
-}
-
 .tagCardContent .tagFullName {
   font-family: "Apercu-Bold";
   text-transform: uppercase;
@@ -823,12 +815,6 @@ html {
   font-family: "Apercu-Bold";
 }
 
-.paperContent .MuiTypography-body1,
-.paperContent .MuiTypography-body2,
-.authBodyLink .authBodyLinkText, {
-  font-family: "Apercu-Medium";
-}
-
 .authCard .MuiCardContent-root:last-child {
   padding-bottom: 16px;
 }
@@ -838,12 +824,6 @@ html {
   margin-bottom: 0;
   align-items: center;
   flex-direction: column;
-}
-
-.authCard form .MuiFormHelperText-root,
-.authCard form .MuiInputLabel-root,
-.authCard form .MuiInputBase-input {
-  font-family: "Apercu-Medium";
 }
 
 .authCardActions {
@@ -871,7 +851,6 @@ html {
 
 .MuiTypography-body1 .authBodyLinkText {
   color: #757575;
-  font-family: "Apercu-Medium";
 }
 
 .tagFullName .MuiTypography-h2 {
