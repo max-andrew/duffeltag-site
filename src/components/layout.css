@@ -823,6 +823,12 @@ html {
   font-family: "Apercu-Bold";
 }
 
+.paperContent .MuiTypography-body1,
+.paperContent .MuiTypography-body2,
+.authBodyLink .authBodyLinkText, {
+  font-family: "Apercu-Medium";
+}
+
 .authCard .MuiCardContent-root:last-child {
   padding-bottom: 16px;
 }
