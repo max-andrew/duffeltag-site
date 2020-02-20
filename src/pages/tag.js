@@ -17,7 +17,7 @@ class Tag extends React.Component {
 		this.state = {}
 	}
 
-	componentDidMount() {
+	UNSAFE_componentWillMount() {
 		// get tag from url
 		const urlArray = window.location.href.split("/")
 		var pageTag = urlArray[urlArray.indexOf("tag")+1]
@@ -101,7 +101,6 @@ class Tag extends React.Component {
         <Slide direction="up" in={true} mountOnEnter unmountOnExit>
 			<Typography className="authBodyLink">
 				<Link
-					component="button"
 					variant="body2"
 					className="authBodyLinkText"
 					href="/me"

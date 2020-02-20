@@ -25,7 +25,7 @@ class Login extends React.Component {
     }
   }
 
-  UNSAFE_componentDidMount() {
+  UNSAFE_componentWillMount() {
     this.handleIsLoggedIn()
   }
 
@@ -142,7 +142,7 @@ class Login extends React.Component {
                     label="Email"
                     type="email"
                     name="email"
-                    defaultValue={this.state.email}
+                    defaultValue={this.state.email || ''}
                     onChange={this.handleUpdate}
                     error={this.state.emailError}
                     margin="normal"
