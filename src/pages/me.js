@@ -189,16 +189,16 @@ class Me extends React.Component {
 
   render() {
     const getHandleBars = () => {
-      var rows = []
-      for (var i = 0; i < 4; i++) {
-        const selectName = "platform"+i
-        const inputName = "handle"+i
-        rows.push(
-        	<div key={i}>
-	        	<div className="block">
+    	var rows = []
+    	for (var i = 0; i < 4; i++) {
+        	const selectName = "platform"+i
+			const inputName = "handle"+i
+			rows.push(
+				<div key={i}>
+				<div className="block">
 					<InputLabel shrink htmlFor={selectName}>
-	          			Platform
-	        		</InputLabel>
+					Platform
+					</InputLabel>
 					<Select
 						name={selectName}
 						value={this.state[selectName] || ''}
